@@ -71,6 +71,6 @@ class SaleController extends Controller
             $saleDescription->save();
         }
 
-        return response()->json($sale->all());
+        return response()->json($sale);
     }
 }
