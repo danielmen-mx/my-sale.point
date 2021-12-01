@@ -61,37 +61,44 @@
     }
 </style>
 
-<div class="card shadow">
-    <h1>Search of products</h1>
-    <div class="autocomplete full-width">
-        <input type="number" id="number" style="width: 3rem;" value=1>
-        <input type="text" id="formulario" class="my-2" style="width: 90%;">
-        <input type="button" class="btn btn-success" id="addProductBtn" value="Add">
+<div class="container">
+    <div class="card shadow" style="width: 100%">
+        <h1>Search of products</h1>
+        <div class="autocomplete full-width">
+            <input type="number" id="number" style="width: 3rem;" value=1>
+            <input type="text" id="formulario" class="my-2" style="width: 90%;">
+            <input type="button" class="btn btn-success" id="addProductBtn" value="Add">
+        </div>
+
+        <div class="card-header">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="table table-hover" id="carrito"></tbody>  {{-- this is the containt about the list of prodcuts --}}
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="float-right">
+                    <h3>Total:</h3>
+                    <h5 id="total_price"></h5>
+                    <input type="submit" class="btn btn-success m-2" name="buyCarrito" style="width: 4rem;" value="Buy" onclick="vender()">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Brand</th>
-        <th scope="col">Price</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Subtotal</th>
-        <th scope="col">Options</th>
-        </tr>
-    </thead>
-    <tbody class="table table-hover" id="carrito"></tbody>  {{-- this is the containt about the list of prodcuts --}}
-</table>
 
-<footer>
-    <h3>Total:</h3>
-    <h5 id="total_price"></h5>
-
-    <div class="content">
-        <input type="submit" class="btn btn-success m-2" name="buyCarrito" style="width: 4rem;" value="Buy" onclick="vender()">
-    </div>
-</footer>
 
 {{-- The Json code to get the list of products --}}
 <script> 
@@ -216,8 +223,11 @@
         })
         .then(response => response.json())
         .then(data => {
+            debugger
             console.log(data);
+            location.replace('http://127.0.0.1:8000/sales/' + data.id)
         });
+
     }
 
     addProductBton = document.getElementById("addProductBtn");
