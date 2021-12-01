@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\CostumerController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\SalePointController;
@@ -26,21 +28,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('posts', Backend\PostController::class)
+Route::resource('posts', PostController::class)
     ->middleware('auth')
     ->except('show');
 
-Route::resource('products', Backend\ProductController::class)
+Route::resource('products', ProductController::class)
     ->middleware('auth')
     ->except('show');
 
-Route::resource('sale_point', Backend\SalePointController::class);
-
-// Route::get('/', function() {
-// return view('sale_point.index');
-// });
+Route::resource('sale_point', SalePointController::class);
 
 Route::get('products/all-products', [ProductController::class, 'productList']);
 
-Route::resource('sales', Backend\SaleController::class)
+Route::resource('sales', SaleController::class)
+    ->middleware('auth');
+
+Route::resource('costumers', CostumerController::class)
     ->middleware('auth');
