@@ -12,6 +12,13 @@
                     </a>
                 </div>
 
+                <div class="card-header">
+                    <form action="">
+                        <input type="text" name="searchProduct" style="width: 90%;" value="{{ $searchProduct }}">
+                        <input type="submit" class="btn btn-sm btn-success float-lg-right">
+                    </form>
+                </div>
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,7 +27,7 @@
                     @endif
 
                     <table class="table">
-                        <thead>
+                        <thead class="table-info">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -63,6 +70,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $products->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

@@ -5,16 +5,22 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->get();
+        $searchProduct = $request->searchProduct;
+        if ($searchProduct == null) {
+            $products = Product::latest()->paginate(5);
+        } else {
+            $products = Product::where('name', "LIKE", "%$searchProduct%")->paginate(5);
+        }
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'searchProduct'));
     }
 
     public function create()

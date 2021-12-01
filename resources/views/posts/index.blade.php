@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     Articles
@@ -12,6 +12,13 @@
                     </a>
                 </div>
 
+                <div class="card-header">
+                    <form action="">
+                        <input type="text" name="searchPost" style="width: 90%" value="{{ $searchPost }}">
+                        <input type="submit" class="btn btn-sm btn-success float-right">
+                    </form>
+                </div>
+                 
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,10 +27,11 @@
                     @endif
 
                     <table class="table">
-                        <thead>
+                        <thead class="table-info">
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
+                                <th colspan="2">&nbsp;</th>
                                 <th colspan="2">&nbsp;</th>
                             </tr>
                         </thead>
@@ -53,6 +61,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $posts->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use Illuminate\Http\Request;
 
 // to eliminate an image is necesary first beggin with the install of the doc required, next this is the route where the images is saved after we charge on a database
 use Illuminate\Support\Facades\Storage;
@@ -12,11 +13,16 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::latest()->get();
+        $searchPost = $request->searchPost;
+        if ($searchPost == null) {
+            $posts = Post::latest()->paginate(3);
+        } else {
+            $posts = Post::where('title', "LIKE", "%$searchPost%")->paginate(3);
+        }
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'searchPost'));
     }
 
     public function create()
