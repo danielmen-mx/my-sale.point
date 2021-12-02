@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCostumersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('costumers', function (Blueprint $table) {
@@ -19,7 +14,7 @@ class CreateCostumersTable extends Migration
             $table->string('last_name');
             $table->date('birthday')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique()->nullable();
+            $table->string('phone')->unique()->limit(12)->nullable();
             $table->timestamps();
         });
 
@@ -31,11 +26,6 @@ class CreateCostumersTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('costumers');
