@@ -62,17 +62,21 @@
 </style>
 
 <div class="container">
-    <div class="card shadow" style="width: 100%">
-        <h1>Search of products</h1>
-        <div class="autocomplete full-width">
-            <input type="number" id="number" style="width: 3rem;" value=1>
-            <input type="text" id="formulario" class="my-2" style="width: 90%;">
-            <input type="button" class="btn btn-success" id="addProductBtn" value="Add">
+    <div class="card" style="width: 100%">
+        <div class="card shadow">
+            <div class="card">
+                <h1>Search of products</h1>
+                <div class="autocomplete full-width">
+                    <input type="number" id="number" style="width: 3rem;" value=1>
+                    <input type="text" id="formulario" class="my-2" style="width: 90%;">
+                    <input type="button" class="btn btn-success" id="addProductBtn" value="Add">
+                </div>
+            </div>
         </div>
 
         <div class="card-header">
             <table class="table">
-                <thead>
+                <thead class="table-info">
                     <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Brand</th>

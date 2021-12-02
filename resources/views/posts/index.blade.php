@@ -31,7 +31,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
-                                <th colspan="2">&nbsp;</th>
+                                <th colspan="2">Options</th>
                                 <th colspan="2">&nbsp;</th>
                             </tr>
                         </thead>

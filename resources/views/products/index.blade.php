@@ -15,7 +15,7 @@
                 <div class="card-header">
                     <form action="">
                         <input type="text" name="searchProduct" style="width: 90%;" value="{{ $searchProduct }}">
-                        <input type="submit" class="btn btn-sm btn-success float-lg-right">
+                        <input type="submit" class="btn btn-sm btn-info float-lg-right" value="Search">
                     </form>
                 </div>
 
@@ -37,6 +37,7 @@
                                 <th>Acquisition</th>
                                 <th>Quantity available</th>
                                 <th>Options</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>

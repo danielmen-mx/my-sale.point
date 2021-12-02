@@ -14,9 +14,9 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Total</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Created at</th>
+                            <th scope="col">Updated at</th>
                             <th scope="col">Options</th>
-                            <th scope="col">&nbsp;</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>

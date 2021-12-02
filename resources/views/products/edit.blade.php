@@ -13,7 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('products.update', $product) }}"
+                            method="POST"
+                            enctype="multipart/form-data">
+                        
                         <div class="form-group">
                             <label>Name*</label>
                             <input type="text" name="name" class="form-control" required value="{{ old('name', $product->name) }}">
