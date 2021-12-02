@@ -35,7 +35,7 @@
 
                         <div class="form-group">
                             <label>Content enbed *</label>
-                            <input type="text" name="iframe" class="form-control"></input>
+                            <input type="text" name="iframe" class="form-control">
                         </div>
 
                         <div class="form-group">
