@@ -43,5 +43,7 @@ Route::get('products/all-products', [ProductController::class, 'productList']);
 Route::resource('sales', SaleController::class)
     ->middleware('auth');
 
+Route::get('sales/{sale}/linkCostumer', [SaleController::class, 'linkCostumer']);
+
 Route::resource('costumers', CostumerController::class)
     ->middleware('auth');

@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 
 class CostumerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $costumers = Costumer::oldest()->paginate(5);       // latest or oldest to order by entry
+        $searchCostumer = $request->searchCostumer;
+        if ($searchCostumer == null) {
+            $costumers = Costumer::oldest()->paginate(5);       // latest or oldest to order by entry
+        } else {
+            $costumers = Costumer::where('first_name', "LIKE", "%$searchCostumer%")->paginate(5);
+        }
 
-        return view('costumers.index', compact('costumers'));
+        return view('costumers.index', compact('costumers', 'searchCostumer'));
     }
 
     public function create()

@@ -73,4 +73,10 @@ class SaleController extends Controller
 
         return response()->json($sale);
     }
+
+    public function linkCostumer($id)
+    {
+        $sale = Sale::find($id);
+        return view('sales.linkCostumer', compact('sale', 'id'));
+    }
 }
