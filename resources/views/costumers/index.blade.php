@@ -11,6 +11,15 @@
                         Add New
                     </a>
                 </div>
+
+                <div class="card-header">
+                    <h1>Search Costumer</h1>
+                    <form action="">
+                        <input type="text" name="searchCostumer" style="width: 90%;" value="{{ $searchCostumer }}">
+                        <input type="submit" class="btn btn-sm btn-info float-lg-right" value="Search">
+                    </form>
+                </div>
+
                 <table class="table">
                     <thead class="table-info">
                         <tr>
@@ -40,6 +49,8 @@
                                 </td>
                                 <td>
                                     <form action="{{ route('costumers.destroy', $costumer) }}" method="POST">
+                                        {{-- {{ method_field('PUT')}}
+                                        {{ csrf_field() }} --}}
                                         @csrf
                                         @method('DELETE')
                                         <input 

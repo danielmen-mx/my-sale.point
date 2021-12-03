@@ -7,6 +7,10 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Sale description</h1>
+                        <div class="col-md-10 text-right">
+                        {{-- <a href="{{ $sale->id }}">Link</a> --}}
+                        <a href="{{ $sale->id }}/linkCostumer">Link</a>
+                </div>
                     <h4>ID: {{ $sale->id }}</h4>
                     <h4>Total: {{ $sale->total }}</h4>
                     <h4>Created at: {{ $sale->created_at }}</h4>
