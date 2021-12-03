@@ -3,6 +3,8 @@
 use App\Http\Controllers\Backend\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CostumerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('sales', [SaleController::class, 'store']);
+
+Route::get('costumers', [CostumerController::class, 'index']);
+
+Route::post('costumers', [CostumerController::class, 'store']);
+
+Route::put('costumers/{costumer}', [CostumerController::class, 'update']);
+
+Route::delete('costumers/{costumer}', [CostumerController::class, 'destroy']);
