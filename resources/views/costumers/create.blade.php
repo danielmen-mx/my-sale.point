@@ -45,10 +45,10 @@
 
                         <div class="form-group">
                             @csrf
-                            <button action="{{ route('costumers.index') }}" class="btn btn-sm btn-warning">Back</button>
                             <input type="submit" value="Enter" class="btn btn-sm btn-success">
                         </div>
                     </form>
+                    <a href="{{ route('costumers.index') }}" class="btn btn-sm btn-secondary">Back</a>
                 </div>
             </div>
         </div>

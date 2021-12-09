@@ -40,6 +40,9 @@
                             <input type="submit" value="Update" class="btn btn-sm btn-primary">
                         </div>
                     </form>
+                    <div>
+                        <a href="{{ route('sales.index') }}" class="btn btn-sm btn-secondary">Back</a>
+                    </div>
                 </div>
             </div>
         </div>

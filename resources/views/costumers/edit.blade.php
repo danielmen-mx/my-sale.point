@@ -46,9 +46,9 @@
                             <div class="form-group">
                                 @csrf
                                 @method('PUT')
-                                <button action="{{ route('costumers.index') }}" class="btn btn-sm btn-warning">Back</button>
                                 <input type="submit" value="Update" class="btn btn-sm btn-success">
                             </div>
+                            <a href="{{ route('costumers.index') }}" class="btn btn-sm btn-warning">Back</a>
                         </form>
                     </div>
                 </div>
