@@ -36,14 +36,19 @@ Route::resource('products', ProductController::class)
     ->middleware('auth')
     ->except('show');
 
+Route::get('products/all-products', [ProductController::class, 'productList']);
+
 Route::resource('sale_point', SalePointController::class);
 
-Route::get('products/all-products', [ProductController::class, 'productList']);
 
 Route::resource('sales', SaleController::class)
     ->middleware('auth');
 
 Route::get('sales/{sale}/linkCostumer', [SaleController::class, 'linkCostumer']);
 
+Route::post('sales/{sale}/linkCostumer', [SaleController::class, 'linkCostToSale']);
+
+Route::get('costumers/get-costumers', [CostumerController::class, 'costumerList']);
+
 Route::resource('costumers', CostumerController::class)
-    ->middleware('auth');
+->middleware('auth');
