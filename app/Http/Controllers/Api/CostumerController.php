@@ -37,11 +37,14 @@ class CostumerController extends Controller
             'phone'=>['required','unique:costumers']
         ]);
 
-        if(! $validator->passes()) {        // use this to validate that the data is sending is like the format that we declare
+        if(! $validator->passes()) {     // use this to validate that the data is sending is like the format that we declare
             return response()->json(["error" => $validator->errors() ], 417);   // error 417 is the data not containt the format that is declared
         }
 
-        return response(Costumer::create($request->all()));
+        // $costumer = Costumer::create($request->all());  // this is one form to create the costumer entry, save on a variable and then response that
+        // return response($costumer); // this is what you sent...
+
+        return response(Costumer::create($request->all())); // this is the same code up, but with minus code...
     }
 
     public function show($id)

@@ -36,7 +36,7 @@ class CostumerController extends Controller
 
     public function show($id)
     {
-        //
+        return $id;
     }
 
     public function edit(Costumer $costumer)
@@ -56,5 +56,11 @@ class CostumerController extends Controller
         $costumer = Costumer::find($id);
         $costumer->delete();
         return back()->with('status', 'Delete Success');
+    }
+
+    public function costumerList()
+    {
+        $costumers = Costumer::orderBy('first_name', 'ASC')->get();
+        return response()->json($costumers);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\SaleDescription;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -57,7 +58,9 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+        logger()->debug(Auth::id());
         $sale = new Sale();     // De este modo instanciamos una clase...
+        $sale->user_id = Auth::id();    // De este modo podemos guardar en el sale la propiedad que indica qué usuario loggeado realizo la venta...
         $sale->total = $request->total;
         $sale->save();
 
@@ -78,5 +81,15 @@ class SaleController extends Controller
     {
         $sale = Sale::find($id);
         return view('sales.linkCostumer', compact('sale', 'id'));
+    }
+
+    public function linkCostToSale(Request $request, $id)
+    {
+        $sale = Sale::find($id);
+        
+        $sale->costumer_id = $request->costumer_id;
+        $sale->save();
+
+        return response()->json($sale);
     }
 }

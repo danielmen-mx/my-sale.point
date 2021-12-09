@@ -17,4 +17,5 @@ class Costumer extends Model
         'phone'
     ];
 
+
 }
