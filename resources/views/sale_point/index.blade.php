@@ -70,6 +70,7 @@
                     <input type="number" id="number" style="width: 3rem;" value=1>
                     <input type="text" id="formulario" class="my-2" style="width: 90%;">
                     <input type="button" class="btn btn-success" id="addProductBtn" value="Add">
+                    @csrf
                 </div>
             </div>
         </div>
@@ -102,18 +103,18 @@
     </div>
 </div>
 
-
-
-{{-- The Json code to get the list of products --}}
+<!-- The Json code to get the list of products -->
 <script> 
     fetch('products/all-products')
     .then(response => response.json())
-    .then(data => products = data);
+    .then(data => [
+        products = data]);
 
     var products = [];
     var carrito = [];
-
-    function autocomplete(inp) {
+// <-- Autocomplete function -->
+    function autocomplete(inp)
+    {
         // debugger
         var currentFocus;
         inp.addEventListener("input", function(e) {
@@ -142,16 +143,18 @@
         });
     }
 
-    function syncTotalProducts() {
+    function syncTotalProducts()
+    {
         var totalPriceHTML = document.getElementById("total_price")
         totalPriceHTML.innerHTML = "$ " + getTotal();
     }
-
-    function syncCarritoTableView() {
-        // debugger
+// <-- Make the view of the table -->
+    function syncCarritoTableView()
+    {
         var view_table = document.getElementById("carrito")
         view_table.innerHTML = ""
-        for (let i = 0; i < carrito.length; i++) {
+        for (let i = 0; i < carrito.length; i++)
+        {
             let subtotal = carrito[i].product.sale_price * carrito[i].quantity
             view_table.innerHTML += `
                 <tr>
@@ -167,11 +170,14 @@
                 `
         }
     }
-
-    function pushOrModifyCarrito (element, quantity){
+// <-- Push the data to the carrito array -->
+    function pushOrModifyCarrito (element, quantity)
+    {
             // use 'debugger' to verify step by step what ejecutes in the method/function...
-        for (let i = 0; i < carrito.length; i++) {
-            if (carrito[i].product.id == element.id) {
+        for (let i = 0; i < carrito.length; i++)
+        {
+            if (carrito[i].product.id == element.id)
+            {
                 carrito[i].quantity += quantity;        // <--- Increase the quantity from a product.
                 //let quantityResult = carrito[i].quantity + quantity // 2
                 // let newElement = {
@@ -188,12 +194,15 @@
         });
     }
 
-    function addProduct(){
+    function addProduct()
+    {
         let productNameToSearch = document.getElementById("formulario").value;
         let quantity = document.getElementById("number").value;
         quantity = parseInt(quantity);
-        for (let i = 0; i < products.length; i++) {
-            if (products[i].name == productNameToSearch) {
+        for (let i = 0; i < products.length; i++)
+        {
+            if (products[i].name == productNameToSearch)
+            {
                 pushOrModifyCarrito(products[i], quantity)
                 syncCarritoTableView()
                 syncTotalProducts()
@@ -211,25 +220,27 @@
     }
 
     function vender() {
-        console.log(JSON.stringify({
-                total: getTotal(),
-                description: carrito
-            }));
-        fetch('api/sales',{     // es hacer una peticion al servidor... (AJAX)
+        const csrf = document.getElementsByName('_token')[0].value;
+
+        fetch('/sales/',        // es hacer una peticion al servidor... (AJAX)
+        {
             method: 'POST',
-            body: JSON.stringify({      // es una funcion que recibe un json y lo que envio lo vuelve en string
+            body: JSON.stringify
+            ({      // es una funcion que recibe un json y lo que envio lo vuelve en string
                 total: getTotal(),
-                description: carrito
+                description: carrito,
+                _token: csrf
             }),
-            headers: {
+            headers: 
+            {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
         .then(response => response.json())
-        .then(data => {
+        .then(data =>
+        {
             debugger
-            console.log(data);
-            location.replace('http://127.0.0.1:8000/sales/' + data.id)
+            location.replace('/sales/' + data.id)
         });
 
     }
@@ -238,7 +249,8 @@
 
     addProductBton.addEventListener('click', addProduct);
 
-    function addActive(x) {
+    function addActive(x)
+    {
             if (!x) return false;
                 removeActive(x);
                 if (currentFocus >= x.length) currentFocus = 0;
@@ -246,29 +258,36 @@
                         x[currentFocus].classList.add("autocomplete-active");
     }
 
-    function removeActive(x) {
-        for (var i = 0; i < x.length; i++) {
+    function removeActive(x)
+    {
+        for (var i = 0; i < x.length; i++)
+        {
             x[i].classList.remove("autocomplete-active");
         }
     }
 
-    function closeAllLists(elmnt) {
+    function closeAllLists(elmnt)
+    {
         var x = document.getElementsByClassName("autocomplete-items");
-        for (var i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
+        for (var i = 0; i < x.length; i++)
+        {
+            if (elmnt != x[i] && elmnt != inp)
+            {
                 x[i].parentNode.removeChild(x[i]);
             }
         }
     }
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function(e)
+    {
         closeAllLists(e.target);
     });
 
     var inp = document.getElementById("formulario")
     autocomplete(inp);
 
-    function deleteProduct(i) {
+    function deleteProduct(i)
+    {
         carrito.splice(i, 1)
         syncTotalProducts()
         syncCarritoTableView()
