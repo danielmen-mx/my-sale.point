@@ -36,3 +36,35 @@ https://phpunit.readthedocs.io/en/9.5/assertions.html <--- revisa el contenido d
 
 Podemos realizar pruebas en Feature de forma especifica de una de sus funciones de la siguiente forma:
     $ php artisan test --filter testExample     <!-- de este modo estamos indicando a la terminal realizar una prueba de un único metodo dentro de nuestra carpeta test -->
+
+<!-- Apuntes de Método personalizado -->
+Getter: Su función es permitir el obtener el valor de una propiedad de la clase y así poder utilizar dicho valor en diferentes métodos.
+
+Setter: Su función permite brindar acceso a propiedades especificas para poder asignar un valor fuera de la clase.
+
+Un método en programación es una función que tiene un conjunto de instrucciones definidas dentro de él. El método tiene un nombre para identificarlo. Podemos hacer que requiera diferentes tipos de datos de entrada para ejecutarse. Y podemos hacer que el método devuelva datos como resultado.
+
+<!-- La refactorización -->
+Alterar el codigo sin modificar la prueba, a traves del testing tenemos la respuesta satisfacotoria de los metodos ingresados y vamos a darle una mejor vista para mejorar la calidad y legibilidad de nuestro codigo, en caso de trabajar con un grupo de trabajo es muy util, ya que debemos asegurarnos de que nuestro codigo lo entiendan todos y no dependan de nosotros para continuar con el trabajo.    <<Comenzamos con el metodo de upload en la carpeta profiles y la route>>
+Refactorizar es mejorar el codigo sin dañar la función que realiza.
+
+<!-- Validación -->
+
+
+<!-- Notes -->
+Recuerda siempre nombrar al archivo del Test con está estructura:
+        ExampleTest
+    <<Es muy importante terminar con el "Test" ya que de lo contrario no lo identificará al realizar la prueba>>
+Mientras que los metodos que ingreses dentro del archivo, podrás nombrarlos con la estructura de:
+        TestExample()
+    <<Del mismo modo esta nomenclatura es muy importante ya que de otro modo el test no se ejecutará y te mandará un error>>
+
+<!-- Qué es TDD -->
+Test-Driven Development
+Esto significa <<Desarrolla la prueba, despues desarrolla el codigo>>
+    Se divide en 3 partes:
+    1. Rojo. Creamos la prueba y obtenemos rojo.
+    2. Verde. Desarrollamos el código y corregimos los detalles.
+    3. Refactorización. Opcional, para mejorar la vista de nuestro código y su legibilidad.
+
+Continuaremos con un proyecto nuevo... {tags}

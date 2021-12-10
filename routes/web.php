@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\SalePointController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,13 @@ Route::get('costumers/get-costumers', [CostumerController::class, 'costumerList'
 
 Route::resource('costumers', CostumerController::class)
 ->middleware('auth');
+
+Route::view('profile', 'profile');
+
+// Route::post('profile', function (\Illuminate\Http\Request $request) {   // Está era la ruote que teniamos para cargar una imagen, definiamos el metodo directamente, pero ahora se refactorizará.
+//     $file = $request->file('photo');
+//     $file?->store('profiles');
+//     return redirect('profile');
+// });
+
+Route::post('profile', [App\Http\Controllers\ProfileController::class, 'upload']); // Misma función pero refactorizado.
