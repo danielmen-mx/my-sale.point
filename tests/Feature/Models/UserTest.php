@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class TestUser extends TestCase
 {
-    use RefreshDatabase; // De este modo estaremos trabajando con información falsa para asi mantener segura nuestra database original <Similar que trabajar con migrate>
+    // use RefreshDatabase; // De este modo estaremos trabajando con información falsa para asi mantener segura nuestra database original <Similar que trabajar con migrate>
 
     public function testUser()
     {

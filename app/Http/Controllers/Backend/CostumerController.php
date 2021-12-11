@@ -27,11 +27,12 @@ class CostumerController extends Controller
 
     public function store(Request $request)
     {
-        $costumers = Costumer::create([ 
+        $costumer = Costumer::create([ 
             'costumer_id' => auth()->user()->id
-        ] + $request->all());
+            ] + $request->all());
+        logger()->debug('aqui llegaste');
 
-        return back()->with('status', 'Create Success');
+        return redirect("costumers")->with('status', 'Create Success');
     }
 
     public function show($id)
@@ -55,7 +56,7 @@ class CostumerController extends Controller
     {
         $costumer = Costumer::find($id);
         $costumer->delete();
-        return back()->with('status', 'Delete Success');
+        return redirect("costumers")->with('status', 'Delete Success');
     }
 
     public function costumerList()

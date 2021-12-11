@@ -14,7 +14,11 @@ class CostumerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'first_name' => $this->faker->word(),
+            'last_name' => $this->faker->word(),
+            'birthday' => $this->faker->date(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber()
         ];
     }
 }
