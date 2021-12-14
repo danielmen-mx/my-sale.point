@@ -28,7 +28,7 @@ class CostumerControllerTest extends TestCase
 
     public function testStore()
     {
-        $email = time().'@gamil.com';
+        $email = time().'@gamil.com'; // time() se usa para generar una serie de números que se actualize con cada ejecución, concatenado a un string, de este modo no infringimos la regla de que los correos deben ser unicos.
         $phone = rand(1000000,1000000000);
         $payload = [    // Se ingreso un payload para definir cada propiedad del elemento que se creará
             'first_name' => 'Chato',

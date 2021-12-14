@@ -210,7 +210,8 @@
         }
     }
 
-    function getTotal(){
+    function getTotal()
+    {
         var total = 0
         for (let i = 0; i < carrito.length; i++) {
             let subtotal = carrito[i].product.sale_price * carrito[i].quantity
@@ -219,7 +220,8 @@
         return total
     }
 
-    function vender() {
+    function vender()
+    {
         const csrf = document.getElementsByName('_token')[0].value;
 
         fetch('/sales/',        // es hacer una peticion al servidor... (AJAX)
@@ -239,7 +241,7 @@
         .then(response => response.json())
         .then(data =>
         {
-            debugger
+            debugger;
             location.replace('/sales/' + data.id)
         });
 

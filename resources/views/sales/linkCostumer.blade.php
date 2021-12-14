@@ -66,7 +66,7 @@
 </div>
 
 <script>
-    // <--- Search bar --->
+    // <--- Search costumer bar --->
     var costumers = [];
     var costumersList = [];
     

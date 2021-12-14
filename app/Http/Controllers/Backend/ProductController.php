@@ -39,7 +39,7 @@ class ProductController extends Controller
             $product->image = $request->file('file')->store('products', 'public');
             $product->save();
         }
-        return back()->with('status', 'Create Success');
+        return redirect("products")->with('status', 'Create Success');
     }
 
     public function edit(Product $product)
@@ -57,7 +57,7 @@ class ProductController extends Controller
             $product->image = $request->file('file')->store('products', 'public');
             $product->save();
         }
-        return back()->with('status', 'Update Success');
+        return redirect("products")->with('status', 'Update Success');
     }
 
     public function destroy(Product $product)
@@ -65,7 +65,7 @@ class ProductController extends Controller
         Storage::disk('public')->delete($product->image);
         $product->delete();
 
-        return back()->with('status', 'Delete Success');
+        return redirect("products")->with('status', 'Delete Success');
     }
 
     public function productList()

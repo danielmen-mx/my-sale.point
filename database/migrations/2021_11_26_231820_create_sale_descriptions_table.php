@@ -15,21 +15,13 @@ class CreateSaleDescriptionsTable extends Migration
     {
         Schema::create('sale_descriptions', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('product_id');
-            
             $table->unsignedBigInteger('sale_id');
-
             $table->double('price');
-            
             $table->double('subtotal');
-            
             $table->bigInteger('quantity');
-
             $table->timestamps();
-
             $table->foreign('product_id')->references('id')->on('products');
-
             $table->foreign('sale_id')->references('id')->on('sales');
         });
     }
