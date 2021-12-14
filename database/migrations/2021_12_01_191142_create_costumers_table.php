@@ -28,6 +28,13 @@ class CreateCostumersTable extends Migration
 
     public function down()
     {
+        Schema::table('sales', function (Blueprint $table) {
+            $table->dropForeign('sales_user_id_foreign');
+            $table->dropForeign('sales_costumer_id_foreign');
+            $table->dropColumn('costumer_id');
+            $table->dropColumn('user_id');
+        }); 
+        
         Schema::dropIfExists('costumers');
     }
 }
