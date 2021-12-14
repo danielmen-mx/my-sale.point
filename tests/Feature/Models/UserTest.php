@@ -14,20 +14,24 @@ class TestUser extends TestCase
     public function testUser()
     {
 
-        // Supongamos que estamos elimando, guadar o actualizar... proccess
+        // Supongamos que estamos elimando, guadando o actualizando un registro... proccess
+
+        $email = time().'@gamil.com';
 
         // Creamos un usuario ficticio
         User::factory()->create([
-            'email' => 'dmendez@admin.com'
+            'email' => $email
         ]);
 
+        // Asertamos que realmente se haya creado el usuario
         $this->assertDatabaseHas('users', [
-            'email' => 'dmendez@admin.com'
+            'email' => $email
         ]);
 
-        $this->assertDatabaseMissing('users', [
-            'email' => 'huacalin@admin.com'
-        ]);
+        // // Acertamos que el registro se eliminó
+        // $this->assertDatabaseMissing('users', [
+        //     'email' => 'huacalin@admin.com'
+        // ]);
 
         // Entendamos que cuando trabajamos en un proyecto hacemos uso de una database, pero al testear podemos dañar el codigo que usamos, entonces tenemos que configurarlo de modo que mantengamos segura nuestra información y los test se lleven a cabo...
         // Para finalizar esta configuración iremos a phpunitg.xml para descomentar la conexión con dos database de pruebas...
