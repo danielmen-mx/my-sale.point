@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSaleRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\SaleDescription;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Validator;
 
 class SaleController extends Controller
 {
@@ -20,14 +24,17 @@ class SaleController extends Controller
     public function show($id)
     {
         $sale = Sale::find($id); #  select* from sales where id = $id LIMIT 1
-        // $sale = Sale::findOrFail($id);
+        // $sale = Sale::findOrFail($id);   # this do it the same function but with an specially diferentiation, that if the find fail returns a notification more exactly.
         if ($sale) {
             return view('sales.show', compact("sale", "id"));
+
             // return view('sales.show', [
             //     "sale" => $sale,
             //     "id"    => $id
             // ]);
+
             // return view('sales.show')->with('sale', $sale); // <---- This method only send 1 paramether
+
             // return view('sales.show')->with([
             //     "sale" => $sale,
             //     "id"    => $id
@@ -36,16 +43,6 @@ class SaleController extends Controller
             return back();
         }
     }
-
-    // public function create()
-    // {
-    //     return view('sales.create');
-    // }
-
-    // public function update(ProductRequest $request, Product $product)
-    // {
-        
-    // }
 
     public function destroy($id)
     {
@@ -56,23 +53,42 @@ class SaleController extends Controller
         return back()->with('status', 'Delete Success');
     }
 
-    public function store(Request $request)
+    public function store(StoreSaleRequest $request)
     {
+        // $validator = Validator::make($request->all(), [  # Esta es una forma de ingresar de forma manual una validación de los datos, si deseamos que laravel realize está validación lo hacemos a través del archivo creado StoreSaleRequest.
+        //     'total' => 'required',
+        //     "description" => "required|array|min:1",
+        //     'description.*.product.id' => 'required',
+        //     'description.*.product.sale_price' => 'required',
+        //     'description.*.quantity' => 'required'
+        // ]);
+
+        // // dd($validator->fails());
+        // if ($validator->fails()) {
+        //     return response()->json($validator->messages(), Response::HTTP_BAD_REQUEST);
+        // }
+
         logger()->debug(Auth::id());
         $sale = new Sale();     // De este modo instanciamos una clase...
         $sale->user_id = Auth::id();    // De este modo podemos guardar en el sale la propiedad que indica qué usuario loggeado realizo la venta...
-        $sale->total = $request->total;
+        $sale->total = 0;
         $sale->save();
 
         foreach($request->description as $requestDescription){
+            $product = Product::find($requestDescription["product"]["id"]);
+
             $saleDescription = new SaleDescription();
             $saleDescription->sale_id = $sale->id;
             $saleDescription->product_id = $requestDescription["product"]["id"];
             $saleDescription->price = $requestDescription["product"]["sale_price"];
-            $saleDescription->subtotal = $requestDescription["product"]["sale_price"]*$requestDescription["quantity"];
+            $saleDescription->subtotal = $product->sale_price * $requestDescription["quantity"];
             $saleDescription->quantity = $requestDescription["quantity"];
             $saleDescription->save();
+
+            $sale->total += $saleDescription->subtotal;
         }
+        
+        $sale->save();
 
         return response()->json($sale);
     }
