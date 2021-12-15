@@ -30,7 +30,7 @@ class CostumerController extends Controller
         $costumer = Costumer::create([ 
             'costumer_id' => auth()->user()->id
             ] + $request->all());
-        logger()->debug('aqui llegaste');
+        // logger()->debug('aqui llegaste');    # Utiliza esto para imprimir el debug en el archivo laravel.log
 
         return redirect("costumers")->with('status', 'Create Success');
     }

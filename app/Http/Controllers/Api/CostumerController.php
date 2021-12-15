@@ -22,11 +22,6 @@ class CostumerController extends Controller
         return response()->json($costumers);
     }
 
-    /** 
-     * Store a new customer
-     * @param Request $request
-     * @return Response 
-    */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
