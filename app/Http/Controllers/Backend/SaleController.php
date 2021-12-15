@@ -81,14 +81,14 @@ class SaleController extends Controller
             $saleDescription->sale_id = $sale->id;
             $saleDescription->product_id = $requestDescription["product"]["id"];
             $saleDescription->price = $requestDescription["product"]["sale_price"];
-            $saleDescription->subtotal = $product->sale_price * $requestDescription["quantity"];
+            $saleDescription->subtotal = $product->sale_price * $requestDescription["quantity"];    # El calculo del subtotal no proviene de la pauload enviada por javascript, sino que ahora lo calculamos accediendo directamente a las propiedades del producto al buscarlo a traves de su id.
             $saleDescription->quantity = $requestDescription["quantity"];
             $saleDescription->save();
 
-            $sale->total += $saleDescription->subtotal;
+            $sale->total += $saleDescription->subtotal; # Y sumamos la cantidad que nos resulta, nuevamente con la información que proviene del backend y no de javascript, esto para verificar que nuestras cantidades coinciden y que no estamos siendo engañados por el lado de la payload.
         }
         
-        $sale->save();
+        $sale->save(); # Guardamos el nuevo total que se calculó a traves de la información recibida del lado del backend.
 
         return response()->json($sale);
     }
