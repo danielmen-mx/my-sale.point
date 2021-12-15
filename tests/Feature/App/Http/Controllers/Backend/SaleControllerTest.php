@@ -115,11 +115,22 @@ class SaleControllerTest extends TestCase
         // dd($sale->total . '_' . $payload['total']); # Si te quedan dudas, puedes verificar haciendo un dd a los dos totales obtenidos.
     }
 
-    public function test_link_to_costumer()
+    public function test_link_sale_to_costumer()
     {
         $user = User::factory()->create();
         $sale = Sale::factory()->create();
+        $costumer = Costumer::factory()->create();
 
-        $response = $this->actingAs($user)->get("sales/$sale->id/linkCostumer");
+        $payload = [
+            'costumer_id' => $costumer->id
+        ];
+
+        $this->assertTrue($sale->costumer_id == null);
+        $response = $this->actingAs($user)->json('post', "sales/$sale->id/linkCostumer", $payload);
+        $response->assertSuccessful();
+        // dd($sale['costumer_id'] . ' espacio ' . $payload['id']);
+        $id = $response['id'];
+        $sale = Sale::find($id);
+        $this->assertEquals($sale->costumer_id, $payload['costumer_id']);
     }
 }
